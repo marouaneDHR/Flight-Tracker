@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Avions</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 70px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .navbar {
+            background-color: #6c757d;
+            border-bottom: 2px solid #495057;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            color: #ecf0f1;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .table th {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #e9ecef;
+        }
+
+        .btn-info {
+            background-color: rgb(250, 221, 0);
+            border-color: rgb(250, 221, 0);
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: rgba(58, 55, 55, 0.97);
+            border-color: rgba(58, 55, 55, 0.97);
+            color: rgb(250, 221, 0);
+        }
+
+        .btn-warning,
+        .btn-danger {
+            background-color: rgb(62, 71, 242);
+            border-color: rgb(62, 71, 242);
+            color: white;
+        }
+
+        .btn-warning:hover,
+        .btn-danger:hover {
+            background-color: #b2b0b0;
+            border-color: #b2b0b0;
+            color: rgb(62, 71, 242);
+        }
+
+        .modal-header {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        .modal-body label {
+            font-weight: bold;
+        }
+        .wide-modal .modal-dialog {
+            max-width: 800px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">CONTRÔLE AÉRIEN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href="Welcome.html">HOME</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="Simulation.html">SIMULATION</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="Airplanes.html">AIRPLANES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Airports.html">AIRPORTS</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h2 class="display-4">Gestion des Avions</h2>
+    <button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#addAirplaneModal">Add Airplane</button>
+    <div class="table-responsive">
+        <table class="table table-striped" id="AirplaneTable">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Capacité</th>
+                <th scope="col">Consommation</th>
+                <th scope="col">Autonomy</th>
+                <th scope="col">Type</th>
+                <th scope="col">Historic</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody id="AirplaneTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="addAirplaneModal" tabindex="-1" role="dialog" aria-labelledby="addAirplaneModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addAirplaneModalLabel">Add a new airplane :</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addAirplaneForm" onsubmit="ajouterAvion()">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Airplane type:</label>
+                        <select class="form-control" id="type" required>
+                            <option value="SHORT">Short airplane</option>
+                            <option value="MEDIUM">Medium Airplane</option>
+                            <option value="LONG">Long airplane</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="capacity">Capacity:</label>
+                        <input type="number" class="form-control" id="capacity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consumption">Consumption:</label>
+                        <input type="number" class="form-control" id="consumption" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="autonomy">Autonomy:</label>
+                        <input type="number" class="form-control" id="autonomy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="latitude">Latitude:</label>
+                        <input type="number" class="form-control" id="latitude" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude">Longitude:</label>
+                        <input type="number" class="form-control" id="longitude" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateAirplaneModal" tabindex="-1" role="dialog" aria-labelledby="updateAirplaneModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateAirplaneModalLabel">Update Airplane :</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="updateAirplaneForm">
+                    <div class="form-group">
+                        <label for="updateName">Name:</label>
+                        <input type="text" class="form-control" id="updateName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateType">Airplane type:</label>
+                        <select class="form-control" id="updateType" required>
+                            <option value="SHORT">Short airplane</option>
+                            <option value="MEDIUM">Medium Airplane</option>
+                            <option value="LONG">Long airplane</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateCapacity">Capacity:</label>
+                        <input type="number" class="form-control" id="updateCapacity" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateConsumption">Consumption:</label>
+                        <input type="number" class="form-control" id="updateConsumption" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="updateAutonomy">Autonomy:</label>
+                        <input type="number" class="form-control" id="updateAutonomy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateLatitude">Latitude:</label>
+                        <input type="number" class="form-control" id="updateLatitude" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="updateLongitude">Longitude:</label>
+                        <input type="number" class="form-control" id="updateLongitude" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add a new modal for flight history -->
+<div class="modal fade wide-modal" id="flightHistoryModal" tabindex="-1" role="dialog" aria-labelledby="flightHistoryModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="flightHistoryModalLabel">Flight History :</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Flight ID</th>
+                        <th scope="col">Flight State</th>
+                        <th scope="col">Departure Airport</th>
+                        <th scope="col">Arrival Airport</th>
+                        <th scope="col">Timestamp</th>
+                    </tr>
+                    </thead>
+                    <tbody id="flightHistoryTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="../JS/Airplanes.js"></script>
+
+</body>
+
+</html>

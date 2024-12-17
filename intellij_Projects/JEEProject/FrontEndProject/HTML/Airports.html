@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aéroports - Contrôle Aérien</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 70px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .navbar {
+            background-color: #3498db;
+            border-bottom: 2px solid #2980b9;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .navbar-brand {
+            font-size: 20px;
+            color: #ecf0f1;
+        }
+
+        .navbar-text {
+            font-size: 16px;
+            color: #ecf0f1;
+        }
+
+        .container {
+            background-color: #f8f9fa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-info {
+            background-color: #3498db;
+            border-color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .btn-info:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+
+        .card-img-top {
+            width: 100%;
+            object-fit: cover;
+            height: 200px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-body {
+            background-color: #fff;
+            border-radius: 0 0 8px 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .details {
+            display: none;
+            margin-top: 10px;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: #f8f9fa;
+            border-radius: 0 0 8px 8px;
+        }
+
+
+        .detail p {
+            margin-bottom: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">CONTRÔLE AÉRIEN</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+                <a class="nav-link " href="Welcome.html">HOME</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="Simulation.html">SIMULATION</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="Airplanes.html">AIRPLANES</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="Airports.html">AIRPORTS</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="display-4">AIRPORTS</h2>
+
+    <div class="row" id="airportList">
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+<script src="../JS/Airports.js"></script>
+</body>
+
+</html>
